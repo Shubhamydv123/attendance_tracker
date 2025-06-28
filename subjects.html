@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Subjects</title>
+    <style>
+        table { border-collapse: collapse; width: 50%; }
+        th, td { border: 1px solid #555; padding: 8px 12px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        a { text-decoration: none; }
+        .btn-danger { color: red; font-weight: bold; }
+        .btn-edit { color: blue; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Manage Subjects</h1>
+
+    <form method="POST" action="/add_subject">
+        <input type="text" name="name" placeholder="New Subject Name" required>
+        <input type="submit" value="Add Subject">
+    </form>
+
+    <table>
+        <tr>
+            <th>Subject Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{ subject[1] }}</td>
+            <td>
+                <a class="btn-edit" href="/edit_subject/{{ subject[0] }}">Edit</a> |
+                <a class="btn-danger" href="/delete_subject/{{ subject[0] }}" onclick="return confirm('Delete this subject?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

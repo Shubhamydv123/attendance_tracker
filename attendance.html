@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 80%; margin-bottom: 30px; }
+        th, td { border: 1px solid #555; padding: 8px 12px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        h2 { margin-top: 40px; color: #444; }
+        a { text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Attendance Report (Subject Wise)</h1>
+
+    {% for subject, records in attendance_data.items() %}
+        <h2>{{ subject }}</h2>
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>Enrollment</th>
+                <th>Present</th>
+                <th>Total</th>
+                <th>Percentage</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.name }}</td>
+                <td>{{ record.enrollment }}</td>
+                <td>{{ record.present }}</td>
+                <td>{{ record.total }}</td>
+                <td>{{ record.percentage }}%</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

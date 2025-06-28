@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance System</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: #333; }
+        form { margin-top: 20px; margin-bottom: 40px; }
+        table { width: 80%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px; border: 1px solid #555; text-align: center; }
+        th { background-color: #f2f2f2; }
+        select, input[type=submit], input[type=text] { padding: 8px; margin: 10px 0; }
+        a { display: inline-block; margin-top: 20px; margin-right: 20px; }
+        .btn-danger { color: red; text-decoration: none; font-weight: bold; }
+        .btn-edit { color: blue; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Mark Attendance</h1>
+
+    <h3>Add Student</h3>
+    <form method="POST" action="/add_student">
+        <input type="text" name="name" placeholder="Enter student name" required>
+        <input type="text" name="enrollment" placeholder="Enrollment Number" required>
+        <input type="submit" value="Add Student">
+    </form>
+
+    <h3>Students List</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Enrollment No.</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student[1] }}</td>
+            <td>{{ student[2] }}</td>
+            <td>
+                <a class="btn-edit" href="/edit_student/{{ student[0] }}">Edit</a> |
+                <a class="btn-danger" href="/delete_student/{{ student[0] }}" onclick="return confirm('Delete this student?')">Delete</a>
+            </td>
+        </tr>
+        {% endfor
+        %}
+        </table>
+        <form method="POST" action="/mark_attendance">
+            <label for="subject">Select Subject:</label>
+            <select name="subject" required>
+                {% for subject in subjects %}
+                    <option value="{{ subject }}">{{ subject }}</option>
+                {% endfor %}
+            </select>
+        
+            <table>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                </tr>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student[1] }}</td>
+                    <td><input type="radio" name="{{ student[0] }}" value="Present" required></td>
+                    <td><input type="radio" name="{{ student[0] }}" value="Absent" required></td>
+                </tr>
+                {% endfor %}
+            </table>
+        
+            <input type="submit" value="Mark Attendance">
+        </form>
+        
+        <a href="/report">📊 View Attendance Report</a>
+        <a href="/subjects">⚙️ Manage Subjects</a>
+        <a href="/student_search">🔍 Search Student Attendance</a>
+        
