@@ -3,7 +3,7 @@
 A full-featured web application built using **Flask**, **HTML**, **CSS**, and **SQLite** for managing student attendance in a subject-wise and date-wise manner.
 
 ## 🔗 Live Demo  
-👉 [https://shubhamydv123.github.io/attendance-tracker](https://shubhamydv123.github.io/attendance-tracker)
+👉 [https://shubhamydv123.github.io/attendance_tracker](https://shubhamydv123.github.io/attendance_tracker)
 
 > (Replace with actual live link if deployed separately)
 
